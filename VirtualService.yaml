@@ -1,32 +1,28 @@
-apiVersion: networking.istio.io/v1
- 
+apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
  
 metadata:
   name: nginx
  
 spec:
- 
   hosts:
+  - "*"
  
-  - nginx
+  gateways:
+  - nginx-gateway
  
   http:
- 
   - route:
- 
     - destination:
- 
         host: nginx
- 
         subset: v1
- 
-      weight: 90
+        port:
+          number: 80
+      weight: 50
  
     - destination:
- 
         host: nginx
- 
         subset: v2
- 
-      weight: 10
+        port:
+          number: 80
+      weight: 50
